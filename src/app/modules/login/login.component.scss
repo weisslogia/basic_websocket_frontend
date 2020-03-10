@@ -1,0 +1,26 @@
+.login-card {
+    display: inline-grid;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-items: center;
+    .card-title {
+        display: inline-grid;
+        width: 100%;
+        justify-items: center;
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    mat-card {
+        width: 400px;
+        height: 200px;
+        mat-form-field {
+            width: 100%;
+        }
+    }
+    mat-card-footer {
+        display: inline-grid;
+        justify-items: end;
+        width: 100%;
+    }
+}
