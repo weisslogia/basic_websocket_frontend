@@ -6,12 +6,12 @@
         <br>
         <mat-card-content>
             <mat-form-field class="example-full-width">
-                <mat-label>Favorite food</mat-label>
-                <input matInput placeholder="Ex. Pizza" value="Sushi">
+                <mat-label>Username</mat-label>
+                <input #username matInput placeholder="Ex. awesomeUsername" value="">
             </mat-form-field>
         </mat-card-content>
         <mat-card-footer>
-            <button color="primary" mat-icon-button>
+            <button (click)="login(username)" matTooltip="Login" color="primary" mat-icon-button>
                 <mat-icon>send</mat-icon>
             </button>
         </mat-card-footer>

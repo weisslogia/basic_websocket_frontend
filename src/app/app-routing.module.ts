@@ -1,3 +1,5 @@
+import { LoginGuardService } from './guards/login-guard.service';
+import { AuthGuardService } from './guards/auth-guard.service';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { NgModule } from '@angular/core';
@@ -8,15 +10,18 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuardService]
   },
   {
     path: '',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: '**',

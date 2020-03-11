@@ -7,12 +7,64 @@
     mat-card {
         width: 80%;
         height: 80%;
+        max-height: 80%;
         mat-card-title {
             height: 40px;
         }
         mat-card-content {
+            display: flex;
             height: calc( 100% - 100px);
             max-height: calc( 100% - 110px);
+            .message-area {
+                width: calc( 100% - 275px);
+                height: calc( 100% - 20px);
+                max-height: 100%;
+                overflow: auto;
+                .messages {
+                    display: grid;
+                    width: 100%;
+                    // text-align: center;
+                    max-height: 400px;
+                    scroll-behavior: auto;
+                    div {
+                        display: grid;
+                        width: 100%;
+                        .message {
+                            max-width: 50%;
+                            border: 1px solid black;
+                            padding: 5px;
+                            padding-left: 20px;
+                            border-radius: 30px;
+                            margin-bottom: 5px;
+                        }
+                        .message-other {
+                            background-color: #536DFE;
+                            border-color: #536DFE;
+                            color: white;
+                        }
+                        .message-diffusion {
+                            background-color: #F9A826;
+                            border-color: #F9A826;
+                            color: white;
+                            justify-self: center;
+                        }
+                        .message-me {
+                            background-color: #00BFA6;
+                            border-color: #00BFA6;
+                            color: white;
+                            justify-self: end;
+                        }
+                    }
+                }
+            }
+            .user-area {
+                width: 250px;
+                height: calc( 100% - 20px);
+                mat-card {
+                    height: inherit;
+                    width: inherit;
+                }
+            }
         }
         mat-card-actions {
             mat-form-field {
@@ -21,6 +73,12 @@
             button {
                 width: 30px;
             }
+        }
+        mat-list-item {
+            cursor: pointer;
+        }
+        mat-list {
+            width: 100%;
         }
     }
 }

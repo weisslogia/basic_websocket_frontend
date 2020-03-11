@@ -1,16 +1,57 @@
 <div class="container">
     <mat-card>
         <mat-card-title>Chat view</mat-card-title>
-        <mat-card-content>Message Area</mat-card-content>
+        <mat-card-content>
+            <div class="message-area" id="scrollAble">
+                <div class="messages">
+                    <div *ngFor="let item of messages">
+                        <div *ngIf="item.type == 2" class="message message-diffusion">
+                            <div class="message-title">Message</div>
+                            <div class="from">From {{item.sender}}</div>
+                            <div class="message-body">
+                                {{item.message}}
+                            </div>
+                        </div>
+                        <div *ngIf="item.type == 1 && item.sender !== name" class="message message-other">
+                            <div class="message-title">Message</div>
+                            <div class="from">From {{item.sender}}</div>
+                            <div class="message-body">
+                                {{item.message}}
+                            </div>
+                        </div>
+                        <div *ngIf="item.type == 1 && item.sender === name" class="message message-me">
+                            <div class="message-title">Message</div>
+                            <div class="from"> From me</div>
+                            <div class="message-body">
+                                {{item.message}}
+                            </div>
+                        </div>
+                        <div *ngIf="item.type == 3">
+                            <pre>{{item.message | json}}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-area">
+                <mat-card>
+                    <mat-card-title>Connected as {{name}}</mat-card-title>
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item id="{{item.id}}" (click)="select(item.id)" *ngFor="let item of users"> {{item.name}} </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-card-content>
         <mat-card-actions>
             <mat-form-field class="example-full-width">
-                <mat-label>Favorite food</mat-label>
-                <input matInput placeholder="Ex. Pizza" value="Sushi">
+                <mat-label>Enter a message</mat-label>
+                <input #message matInput placeholder="" value="">
             </mat-form-field>
-            <button color="primary" mat-icon-button>
+            <button (click)="messageHandler(message)" matTooltip="Private message" color="primary" mat-icon-button>
                 <mat-icon>send</mat-icon>
             </button>
-            <button color="primary" mat-icon-button>
+            <button (click)="diffusion(message)" matTooltip="Diffusion message" color="primary" mat-icon-button>
                 <mat-icon>people</mat-icon>
             </button>
         </mat-card-actions>
