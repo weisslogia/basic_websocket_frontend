@@ -16,11 +16,13 @@ export class HomeComponent implements OnInit {
   messages = [];
   previous = null;
   selected = null;
+  id = -1;
   constructor(private services: ServicesService, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.name = currentUser.user.name;
+    this.id = currentUser.user.id;
     const connectedusers: any = await this.services.getConnectedUsers().toPromise();
     connectedusers.forEach(item => {
       this.users.push(item);
@@ -42,9 +44,20 @@ export class HomeComponent implements OnInit {
       }
       if (message.type === 3) {
         message.message = JSON.parse(message.message);
+        if (message.reciver && message.reciver === this.id) {
+          message.message = null;
+        }
+        console.log(message, this.id);
       }
     }
+    const m = [];
     this.messages = messages;
+    for (let i = 0; i < messages.length; i++ ) {
+      if (messages[i].message != null) {
+        m.push(messages[i]);
+      }
+    }
+    this.messages = m;
     this.socket = io(environment.API_BASE_PATH, {
       query: {
         access_token: currentUser.token,
